@@ -18,7 +18,7 @@ record Account(String username, String domain, Integer count) {
 class RecordUtilTest {
 
     @Test
-    void test_patchRecord() throws ReflectiveOperationException {
+    void patchRecord_ok() throws ReflectiveOperationException {
 
         var account = new Account("foo", "example.com", 1);
         Map<String, Object> fields = Map.of("username", "bar");
@@ -30,7 +30,7 @@ class RecordUtilTest {
     }
 
     @Test
-    void test_patchRecord2() throws ReflectiveOperationException {
+    void patchRecord_ok2() throws ReflectiveOperationException {
 
         var account = new Account("foo", "example.com", 1);
         Map<String, Object> fields = Map.of("username", "bar", "count", 2);
@@ -42,7 +42,7 @@ class RecordUtilTest {
     }
 
     @Test
-    void test_Map2Record() throws ReflectiveOperationException {
+    void map2Record_ok() throws ReflectiveOperationException {
 
         Map<String, Object> map = Map.of(
                 "username", "foo",
@@ -56,7 +56,7 @@ class RecordUtilTest {
     }
 
     @Test
-    void test_Record2Map() throws ReflectiveOperationException {
+    void record2Map_ok() throws ReflectiveOperationException {
 
         var rec = new Account("foo", "example.com", 1);
 

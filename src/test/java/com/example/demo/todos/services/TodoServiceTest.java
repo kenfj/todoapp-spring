@@ -28,7 +28,7 @@ class TodoServiceTest {
     private TodoService service;
 
     @Test
-    public void contextLoads() throws Exception {
+    void contextLoads() throws Exception {
         assertThat(service).isNotNull();
     }
 
@@ -37,7 +37,7 @@ class TodoServiceTest {
 
         var todos = service.findAll();
 
-        assertEquals(3, todos.spliterator().getExactSizeIfKnown());
+        assertEquals(3, todos.size());
     }
 
     @Test
@@ -48,6 +48,14 @@ class TodoServiceTest {
         assertTrue(maybeTodo.isPresent());
         maybeTodo.ifPresent(todo -> assertEquals("Baz", todo.title()));
         maybeTodo.ifPresent(todo -> assertEquals(true, todo.completed()));
+    }
+
+    @Test
+    void findById_not_found() {
+
+        Optional<Todo> maybeTodo = service.findById(99999999L);
+
+        assertFalse(maybeTodo.isPresent());
     }
 
     @Test
@@ -63,7 +71,7 @@ class TodoServiceTest {
     }
 
     @Test
-    void create_exception() {
+    void create_err() {
 
         var newTodo = Todo.of(123L, "Hoge");
 
@@ -89,7 +97,7 @@ class TodoServiceTest {
     }
 
     @Test
-    void update_exception() {
+    void update_err() {
 
         var todo = Todo.of(123L, "Hoge");
 
@@ -116,7 +124,7 @@ class TodoServiceTest {
     }
 
     @Test
-    void patch_exception() {
+    void patch_err() {
 
         var map = Map.of("title", (Object) "Fuga");
 
@@ -129,15 +137,15 @@ class TodoServiceTest {
     }
 
     @Test
-    void patch_validation_exception() {
+    void patch_validation_err() {
 
         var map = Map.of("title", (Object) "a");
 
         var ex = assertThrows(ConstraintViolationException.class, () -> {
-            service.patch(1L, map);
+            service.patch(2L, map);
         });
 
-        var expected = "[size must be between 2 and 10]";
+        var expected = "title: size must be between 2 and 30";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -154,7 +162,7 @@ class TodoServiceTest {
     }
 
     @Test
-    void delete_exception() {
+    void delete_err() {
 
         var ex = assertThrows(NoSuchElementException.class, () -> {
             service.deleteById(123L);

@@ -1,5 +1,6 @@
 package com.example.demo.todos.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,7 @@ public class TodoController {
     }
 
     @GetMapping
-    public Iterable<Todo> findAll() {
+    public List<Todo> findAll() {
         return service.findAll();
     }
 

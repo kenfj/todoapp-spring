@@ -1,5 +1,6 @@
 package com.example.demo.todos.services;
 
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -30,7 +31,7 @@ public class TodoService {
         this.validator = validator;
     }
 
-    public Iterable<Todo> findAll() {
+    public List<Todo> findAll() {
         return repository.findAll();
     }
 
@@ -46,10 +47,15 @@ public class TodoService {
     }
 
     public Todo update(@Valid Todo todo) {
-        if (!repository.existsById(todo.id()))
-            throw new NoSuchElementException("Invalid update id: " + todo.id());
 
-        return repository.save(todo);
+        var originTodo = repository.findById(todo.id())
+                .orElseThrow(() -> new NoSuchElementException("Invalid update id: " + todo.id()));
+
+        // fix CreatedDate set to null on update
+        // https://stackoverflow.com/questions/73051733
+        var updatingTodo = todo.withCreatedAt(originTodo.createdAt());
+
+        return repository.save(updatingTodo);
     }
 
     @Transactional

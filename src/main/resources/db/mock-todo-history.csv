@@ -1,0 +1,7 @@
+id,query_type,logged_at,todo_id,title,completed
+,CREATE,2023-10-10 18:57:32.891528,1,foo,false
+,CREATE,2023-10-10 18:57:34.335059,2,bar,false
+,CREATE,2023-10-10 18:57:36.679453,3,baz,false
+,UPDATE,2023-10-10 18:57:38.177158,3,baz,true
+,CREATE,2023-10-10 18:58:12.274521,4,ASDF,false
+,DELETE,2023-10-10 18:58:32.442665,4,,

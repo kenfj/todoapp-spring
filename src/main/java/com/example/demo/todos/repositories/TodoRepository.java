@@ -3,19 +3,22 @@ package com.example.demo.todos.repositories;
 import java.util.List;
 
 import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.example.demo.todos.models.Todo;
 
-public interface TodoRepository extends CrudRepository<Todo, Long> {
+public interface TodoRepository extends ListCrudRepository<Todo, Long> {
 
-    public final String FIND_BY_TITLE_LIKE_SQL = """
+    List<Todo> findByTitleLike(@Param("title") String title);
+
+    final String FIND_BY_SQL = """
                 SELECT *
                 FROM todo
                 WHERE title like :title
             """;
 
-    @Query(FIND_BY_TITLE_LIKE_SQL)
-    List<Todo> findByTitleLike(@Param("title") String title);
+    // same as findByTitleLike but by raw sql for demo
+    @Query(FIND_BY_SQL)
+    List<Todo> findBySql(@Param("title") String title);
 }

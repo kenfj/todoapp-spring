@@ -1,8 +1,39 @@
-# Spring Boot REST API Demo App
+# Spring Boot REST API Demo Todo App
+
+## Features
 
 * Java 17
 * Spring Boot 3
+* Spring Web REST API
+* Java record DTO
 * HTTP PATCH using Java record
+* Spring Data JDBC `ListCrudRepository`
+* Spring Data JDBC custom SQL query
+* Spring Data JDBC `ListQueryByExampleExecutor`
+* Spring Data JDBC pagination, sort and filter
+* Spring Data JDBC Event Listener to log to history table
+* Flyway DB migration
+* h2 `MODE=MySQL` file DB for dev and in-memory DB for test
+* RFC7807 `ProblemDetail` `RestControllerAdvice` using `ResponseEntityExceptionHandler`
+* RFC7807 `ProblemDetail` i18n custom message in `messages.properties`
+* HTTP Client using `@HttpExchange`
+* Custom properties in `application.properties`
+* unit tests with coverage report
+
+### Maven Packages in pom.xml
+
+* org.springframework.boot
+  - spring-boot-starter-web
+  - spring-boot-starter-webflux
+  - spring-boot-starter-validation
+  - spring-boot-starter-data-jdbc
+  - spring-boot-devtools
+  - spring-boot-starter-test
+  - spring-boot-starter-security
+  - spring-boot-configuration-processor
+* com.h2database
+* org.flywaydb
+* org.springdoc
 
 ## Quick Start
 
@@ -48,9 +79,14 @@ export PATH=~/Downloads/apache-maven-3.9.4/bin:${PATH}
 
 * https://medium.com/@truongbui95/jacoco-code-coverage-with-spring-boot-835af8debc68
 * https://sukkiri.jp/technologies/devtools/jacoco/jacoco-with-maven.html
+* method naming convention is short form of `MethodName_StateUnderTest_ExpectedBehavior`
+  - https://dzone.com/articles/7-popular-unit-test-naming
 
 ```bash
-mvn clean test
+mvn clean test site
+
+python -m http.server --directory ./target/site/
+# unit tests report at http://localhost:8000/
 
 python -m http.server --directory ./target/site/jacoco/ 3000
 # coverage report at http://localhost:3000/
@@ -113,3 +149,4 @@ mvn versions:use-latest-versions
 
 * https://spring.io/guides/gs/rest-service/
 * https://spring.io/guides/tutorials/rest/
+* https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/

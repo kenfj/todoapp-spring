@@ -21,7 +21,7 @@ class TodoControllerTest {
     private TodoController controller;
 
     @Test
-    public void contextLoads() throws Exception {
+    void contextLoads() throws Exception {
         assertThat(controller).isNotNull();
     }
 
@@ -30,7 +30,7 @@ class TodoControllerTest {
 
         var todos = controller.findAll();
 
-        assertEquals(3, todos.spliterator().getExactSizeIfKnown());
+        assertEquals(3, todos.size());
     }
 
     @Test

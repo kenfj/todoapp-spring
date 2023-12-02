@@ -1,13 +1,15 @@
 -- SQL for MODE=MySQL
 CREATE TABLE todo (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(50) NOT NULL,
-    completed BOOLEAN NOT NULL DEFAULT 0
+    title VARCHAR(255) NOT NULL,
+    completed BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
 );
 
 -- SQL for MODE=MSSQLServer
 -- CREATE TABLE todo (
 --     id BIGINT PRIMARY KEY IDENTITY(1,1),
---     title VARCHAR(50) NOT NULL,
+--     title VARCHAR(255) NOT NULL,
 --     completed BIT NOT NULL DEFAULT 'FALSE'
 -- )
